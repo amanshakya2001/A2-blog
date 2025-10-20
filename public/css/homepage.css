@@ -1,0 +1,38 @@
+/* Homepage grid and card refinements */
+#home {
+  padding-top: var(--space-xl);
+}
+
+#home .card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#home .card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+#home .card:hover .card-img-top {
+  transform: scale(1.01);
+}
+
+#home .card-title {
+  font-weight: 600;
+}
+
+#home .card-footer .btn {
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  #home .card-img-top { height: 180px; }
+}
+
+@media (max-width: 576px) {
+  #home .card-img-top { height: 160px; }
+}

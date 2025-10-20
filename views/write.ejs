@@ -1,0 +1,66 @@
+<%- include("./particles/header.ejs"); %>
+<%- include("./particles/navbar.ejs"); %>
+<link rel="stylesheet" href="/css/write.css">
+<section id="write" class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="card shadow animate-fadeIn">
+                    <div class="card-header bg-transparent border-0">
+                        <h1 class="m-0">Write a Blog</h1>
+                    </div>
+                    <div class="card-body">
+                        <form aria-label="Create blog form" novalidate>
+                            <div class="form-group mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="Enter a catchy title" required aria-required="true">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="content" class="form-label">Content</label>
+                                <textarea class="form-control" id="content" name="content" rows="10" placeholder="Write your story..." required aria-required="true"></textarea>
+                                <div class="form-text text-muted">Tip: You can paste formatted text; it'll be preserved.</div>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="coverImage" class="form-label">Cover Image</label>
+                                <input type="file" class="form-control" id="coverImage" name="coverImage" accept="image/*" aria-describedby="coverHelp">
+                                <div id="coverHelp" class="form-text text-muted">Recommended size: 1200×600. JPG/PNG/WebP.</div>
+                            </div>
+                            <div class="d-flex justify-content-end gap-2">
+                                <a href="/" class="btn btn-outline">Cancel</a>
+                                <button type="button" class="btn btn-primary" id="submitBtn">Publish</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    document.getElementById("submitBtn").addEventListener("click", () => {
+        const title = document.getElementById("title").value;
+        const content = document.getElementById("content").value;
+        const coverImage = document.getElementById("coverImage").files[0];
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("content", content);
+        formData.append("coverImage", coverImage);
+        fetch("/api/blog", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.success){
+                alert("Blog created successfully");
+                window.location.href = "/";
+            }else{
+                alert(data.error);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    });
+</script>
+<%- include("./particles/footer.ejs"); %>

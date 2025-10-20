@@ -1,0 +1,46 @@
+<header role="banner">        
+  <nav class="navbar navbar-expand-lg navbar-dark" aria-label="Main navigation" style="background: transparent; border-bottom: 1px solid var(--border);">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/" aria-label="A2 Blog Home">
+        <div class="company-logo" aria-hidden="true">
+          <span>A<sup>2</sup></span>
+        </div>
+        <span class="d-none d-sm-inline text-muted">A2 Blog</span>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- future nav items -->
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle theme" title="Toggle theme">
+            <i class="bi bi-moon-stars"></i>
+          </button>
+          <% if (locals.email) { %>
+            <a href="/write" class="btn btn-outline d-none d-sm-inline">Write</a>
+            <div class="dropdown">
+              <button class="btn bg-transparent border-0 p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Account menu">
+                <div class="avatar ms-1">
+                  <span><%= locals.email.charAt(0).toUpperCase() %></span>
+                </div>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="/profile"><i class="bi bi-person"></i> Profile</a></li>
+                <li><a class="dropdown-item" href="/settings"><i class="bi bi-gear"></i> Settings</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><button class="dropdown-item danger" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</button></li>
+              </ul>
+            </div>
+          <% } else { %>
+            <a href="/login" class="btn btn-outline">Login</a>
+            <a href="/register" class="btn btn-primary">Register</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

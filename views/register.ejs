@@ -1,0 +1,40 @@
+<%- include("./particles/header") %>
+<link rel="stylesheet" href="/css/register.css">
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <div class="logo">
+        <p class="m-0">A<sup>2</sup></p>
+      </div>
+      <h1 class="title text-white">Create your account</h1>
+      <p class="subtitle text-white">Join A<sup>2</sup> Blog and start sharing</p>
+    </div>
+    <form id="register-form" class="form" action="/register" method="POST" novalidate>
+
+      <div id="inlineAlert" class="alert alert-danger" style="display: none;"></div>
+      <div class="mb-3">
+        <label class="label" for="fullName">Full name</label>
+        <input class="input" type="text" id="fullName" name="fullName" placeholder="Aman Singh" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="label" for="email">Email</label>
+        <input class="input" type="email" id="email" name="email" placeholder="you@example.com" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="label" for="password">Password</label>
+        <input class="input" type="password" id="password" name="password" placeholder="••••••••" required />
+      </div>
+
+      <button class="button" type="button" id="registerBtn">Create account</button>
+      <p class="footer-note">
+        Already have an account?
+        <a class="link" href="/login">Sign in</a>
+      </p>
+    </form>
+  </div>
+</div>
+<script defer src="/scripts/register.js"></script>
+<%- include("./particles/footer") %>
+

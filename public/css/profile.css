@@ -1,0 +1,28 @@
+/* Profile page styles */
+#profile .card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+#profile .avatar-xl {
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
+}
+
+#profile h1 {
+  font-size: 1.75rem;
+}
+
+#profile .card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+#profile .card:hover .card-img-top {
+  transform: scale(1.01);
+  transition: var(--transition);
+}

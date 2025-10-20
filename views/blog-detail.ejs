@@ -1,0 +1,70 @@
+<%- include("./particles/header.ejs"); %>
+<%- include("./particles/navbar.ejs"); %>
+<link rel="stylesheet" href="/css/blog-detail.css">
+<section id="blog-detail" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 mx-auto">
+                <img class="mb-3 rounded shadow" src="<%= blog.coverImage %>" alt="<%= blog.title %> cover image" width="100%" height="400px">
+                <h1 class="mb-3"><%= blog.title %></h1>
+                <div class="d-flex justify-content-between">
+                    <p><small class="text-muted">Last updated <%= blog.updatedAt %></small></p>
+                    <p><small class="text-muted">Author: <%= blog.author.fullname %></small></p>
+                </div>
+                <pre class="content-body"><%= blog.content %></pre>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="comments" class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-12 mx-auto">
+                <h2 class="mb-3">Comments</h2>
+            </div>
+            <% if (locals.email) { %>
+            <div class="col-lg-8 col-12 mx-auto mb-5">
+                <div class="message-input bg-light p-3 rounded shadow-sm">
+                    <input class="form-control mb-3" type="text" placeholder="Add a comment" id="comment">
+                    <button class="btn btn-primary ms-auto px-5 d-flex align-items-center" onclick="postComment('<%= blog._id %>')">
+                        Post
+                        <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <% } %>
+            <% if (blog.comments.length === 0) { %>
+                <div class="col-lg-8 col-12 mx-auto">
+                    <p>No comments yet.</p>
+                </div>
+            <% } else { %>
+                <% blog.comments.forEach(comment => { %>
+                    <div class="col-lg-8 col-12 mx-auto mb-3">
+                        <div class="d-flex justify-content-between">
+                            <div class="col-auto pe-3">
+                                <p class="avatar">
+                                    <small class="text-muted"><%= comment.author.fullname[0].toUpperCase() %></small>
+                                </p>
+                            </div>
+                            <div class="col">
+                                <div class="message-box bg-light p-3 pe-5 position-relative">
+                                    <p class="mb-0" style="white-space: pre-wrap;"><%= comment.content %></p>
+                                    <small class="text-muted ms-auto d-table"><%= comment.createdAt %></small>
+                                    <% if (locals.email === comment.author.email) { %>
+                                    <svg onclick="deleteComment('<%= comment._id %>','<%= blog._id %>')" class="trash-btn ms-auto position-absolute top-0 end-0 me-2 mt-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                    </svg>
+                                    <% } %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
+</section>
+<%- include("./particles/footer.ejs"); %>

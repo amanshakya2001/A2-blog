@@ -1,0 +1,32 @@
+<%- include("./particles/header.ejs"); %>
+<%- include("./particles/navbar.ejs"); %>
+<link rel="stylesheet" href="/css/homepage.css">
+<section id="home" class="py-5">
+    <div class="container">
+        <a href="/write" class="btn btn-primary mb-3 d-table ms-auto" aria-label="Write a new blog post">Write a Blog</a>
+        <div class="row g-4">       
+            <% blogs.forEach(blog => { %>
+            <div class="col-lg-3 col-md-6 col-sm-12 h-100">
+                <div class="card h-100">
+                    <img class="card-img-top mb-3" src="<%= blog.coverImage %>" alt="<%= blog.title %> cover image" width="100%" height="200px">
+                    <div class="card-header bg-transparent border-0">
+                        <h5 class="card-title text-truncate"><%= blog.title %></h5>
+                    </div>
+                    <div class="card-body h-100">
+                        <p class="card-text mb-3 custom-truncate-3"><%= blog.content %></p>
+                        <p class="card-text mb-0"><small class="text-muted"><%= blog.updatedAt %></small></p>
+                        <p class="card-text"><small class="text-muted">Author: <%= blog.author.fullname %></small></p>
+                    </div>
+                    <div class="card-footer bg-transparent border-0">
+                        <a href="/blog/<%= blog._id %>" class="btn btn-primary w-100">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+            <% if (blogs.length === 0) { %>
+                <p class="text-center">No blogs found</p>
+            <% } %>
+        </div>
+    </div>
+</section>
+<%- include("./particles/footer.ejs"); %>
