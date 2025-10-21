@@ -3,12 +3,17 @@
   padding-top: var(--space-xl);
 }
 
+#home .row {
+  align-items: stretch;
+}
+
 #home .card {
   display: flex;
   flex-direction: column;
   overflow: hidden;
   flex: 1 1 auto;
   height: 100%;
+  width: 100%;
 }
 
 #home .card-img-top {
@@ -32,7 +37,8 @@
 }
 
 /* Equal height columns: stretch children and make footer stick to bottom */
-#home .row > div { /* direct column children */
+#home .row > [class^="col"],
+#home .row > [class*=" col-"] { /* direct bootstrap column children */
   display: flex;
 }
 
@@ -44,6 +50,7 @@
 
 #home .card-footer {
   margin-top: auto;
+  padding-top: var(--space);
 }
 
 @media (max-width: 992px) {
@@ -52,4 +59,21 @@
 
 @media (max-width: 576px) {
   #home .card-img-top { height: 160px; }
+}
+
+/* Fixed visual rhythm for equal-height cards */
+@media (min-width: 1200px) { /* large screens */
+  #home .card { min-height: 520px; }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  #home .card { min-height: 500px; }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #home .card { min-height: 480px; }
+}
+
+@media (max-width: 767.98px) {
+  #home .card { min-height: 440px; }
 }

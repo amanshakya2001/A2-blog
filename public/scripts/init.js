@@ -145,4 +145,29 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
         console.warn('Theme toggle init failed', err);
     }
+
+    // Equalize homepage card heights
+    const equalizeHomeCards = () => {
+        const cards = document.querySelectorAll('#home .card');
+        if (!cards.length) return;
+        // reset first
+        cards.forEach(c => c.style.minHeight = '');
+        let max = 0;
+        cards.forEach(c => { max = Math.max(max, c.offsetHeight); });
+        if (max > 0) cards.forEach(c => c.style.minHeight = max + 'px');
+    };
+
+    // Run after images load
+    if (document.readyState === 'complete') {
+        equalizeHomeCards();
+    } else {
+        window.addEventListener('load', equalizeHomeCards);
+    }
+
+    // Debounced resize
+    let rh;
+    window.addEventListener('resize', () => {
+        clearTimeout(rh);
+        rh = setTimeout(equalizeHomeCards, 150);
+    });
 });
